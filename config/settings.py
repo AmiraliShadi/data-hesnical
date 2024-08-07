@@ -33,7 +33,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 DJANGO_APPS = [
-
+    'api.apps.ApiConfig',
+    'dataparser.apps.DataparserConfig',
 ]
 
 THIRD_PARTIES = [
