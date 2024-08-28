@@ -149,6 +149,6 @@ CELERY_BROKER_URL = f'redis://{CURRENT_SERVER_URL}:6379/0'
 CELERY_BEAT_SCHEDULE = {
     'send-request-every-15-minutes': {
         'task': 'dataparser.tasks.send_request',
-        'schedule': 10,
+        'schedule': 900,
     },
 }
