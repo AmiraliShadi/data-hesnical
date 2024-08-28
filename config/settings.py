@@ -143,3 +143,12 @@ SPECTACULAR_SETTINGS = {
 }
 
 MAIN_SERVER_URL = config('MAIN_SERVER_URL')
+CURRENT_SERVER_URL = config('CURRENT_SERVER_URL')
+
+CELERY_BROKER_URL = f'redis://{CURRENT_SERVER_URL}:6379/0'
+CELERY_BEAT_SCHEDULE = {
+    'send-request-every-15-minutes': {
+        'task': 'dataparser.tasks.send_request',
+        'schedule': 10,
+    },
+}

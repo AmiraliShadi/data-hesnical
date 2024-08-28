@@ -1,2 +1,6 @@
-def transform_email(email):
-    return f'{email.split("@")[0]}-{email.split("@")[1].split(".")[0]}'
+import chardet
+
+
+def detect_encoding(content):
+    result = chardet.detect(content)
+    return result['encoding']

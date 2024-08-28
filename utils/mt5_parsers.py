@@ -1,4 +1,4 @@
-def parse_maximum_consecutive_value(value):
+def mt5_parse_maximum_consecutive_value(value):
     open_paren_index = value.find('(')
     close_paren_index = value.find(')')
 
@@ -10,7 +10,7 @@ def parse_maximum_consecutive_value(value):
     return None, None
 
 
-def parse_maximal_consecutive_value(value):
+def mt5_parse_maximal_consecutive_value(value):
     open_paren_index = value.find('(')
     close_paren_index = value.find(')')
 
@@ -22,7 +22,7 @@ def parse_maximal_consecutive_value(value):
     return None, None
 
 
-def parse_trades_value(value):
+def mt5_parse_trades_value(value):
     open_paren_index = value.find('(')
     close_paren_index = value.find(')')
 
@@ -34,7 +34,7 @@ def parse_trades_value(value):
     return None, None
 
 
-def parse_profit_loss_value(value):
+def mt5_parse_profit_loss_value(value):
     open_paren_index = value.find('(')
     close_paren_index = value.find(')')
 
@@ -46,7 +46,7 @@ def parse_profit_loss_value(value):
     return None, None
 
 
-def parse_balance_drawdown_value(value):
+def mt5_parse_balance_drawdown_value(value):
     open_paren_index = value.find('(')
     close_paren_index = value.find(')')
 
@@ -58,7 +58,7 @@ def parse_balance_drawdown_value(value):
     return None, None
 
 
-def parse_balance_drawdown_relative_value(value):
+def mt5_parse_balance_drawdown_relative_value(value):
     open_paren_index = value.find('(')
     close_paren_index = value.find(')')
 
@@ -70,6 +70,6 @@ def parse_balance_drawdown_relative_value(value):
     return None, None
 
 
-def parse_margin_level_value(value):
+def mt5_parse_margin_level_value(value):
     percent = value.strip().rstrip('%')
     return percent
