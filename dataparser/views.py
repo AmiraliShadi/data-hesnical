@@ -7,8 +7,8 @@ from rest_framework.views import APIView
 
 from api import status
 from api.response import custom_response
-from dataparser.models import Report
-from dataparser.serializers import ReportSerializer
+from dataparser.models import Report, BalanceHistory
+from dataparser.serializers import ReportSerializer, BalanceHistorySerializer
 from utils import constants
 from utils.mt4_data_parser import mt4_extract_data_from_html_file
 from utils.mt5_data_parser import mt5_extract_data_from_html_file
@@ -35,9 +35,14 @@ class HTMLParserApi(APIView):
 
             if extraction_function:
                 response = extraction_function(report.url)
+
+                balance_histories = BalanceHistory.objects.filter(report=report).order_by('timestamp')
+                serialized_balance_histories = BalanceHistorySerializer(balance_histories, many=True)
+
                 response.update({
-                    'mt_version': report.mt_version,
-                    'account_no': report.account_no
+                    'mt_version': str(report.mt_version),
+                    'account_no': report.account_no,
+                    'balance_history': serialized_balance_histories.data,
                 })
                 data.append(response)
 

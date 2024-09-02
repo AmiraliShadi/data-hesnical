@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+from celery.schedules import crontab
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -149,6 +150,10 @@ CELERY_BROKER_URL = f'redis://{CURRENT_SERVER_URL}:6379/0'
 CELERY_BEAT_SCHEDULE = {
     'send-request-every-15-minutes': {
         'task': 'dataparser.tasks.send_request',
-        'schedule': 900,
+        'schedule': crontab(minute='14,29,44,59'),
+    },
+    'update-balance-history-everyday-midnight': {
+        'task': 'dataparser.tasks.update_balance_history',
+        'schedule': crontab(minute='1', hour='0'),
     },
 }
