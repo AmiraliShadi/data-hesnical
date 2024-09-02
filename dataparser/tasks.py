@@ -1,6 +1,7 @@
 import requests
 from celery import shared_task
 from django.conf import settings
+from django.db.models import Q
 
 from dataparser.models import Report, BalanceHistory
 from utils import constants
@@ -11,13 +12,11 @@ from utils.mt5_data_parser import mt5_extract_data_from_html_file
 @shared_task
 def send_request():
     api_url = settings.MAIN_SERVER_URL
-
-    reports = Report.objects.filter(url__isnull=True).filter(url='')
-
-    data_to_send = [{'email': report.email, 'account_no': report.account_no} for report in reports]
+    reports = Report.objects.filter(Q(url__isnull=True) | Q(url=''))
+    data_to_send = [{'email': report.email, 'account_no': report.account_no, 'report_id': report.id} for report in reports]
 
     for data in data_to_send:
-        response = requests.post(api_url, json=data)
+        response = requests.post(api_url, data=data)
         response.raise_for_status()
 
         if not response.status_code == 404:

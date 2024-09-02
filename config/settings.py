@@ -39,6 +39,7 @@ DJANGO_APPS = [
 THIRD_PARTIES = [
     'rest_framework',
     'drf_spectacular',
+    'corsheaders',
 ]
 
 INSTALLED_APPS = [
@@ -55,12 +56,15 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'config.urls'
 
@@ -144,13 +148,15 @@ SPECTACULAR_SETTINGS = {
 }
 
 MAIN_SERVER_URL = 'https://hesnical.com/fetch/cred/xy.php'
+
 CURRENT_SERVER_URL = '127.0.0.1'
 
 CELERY_BROKER_URL = f'redis://{CURRENT_SERVER_URL}:6379/0'
+
 CELERY_BEAT_SCHEDULE = {
     'send-request-every-15-minutes': {
         'task': 'dataparser.tasks.send_request',
-        'schedule': crontab(minute='14,29,44,59'),
+        'schedule': 10,
     },
     'update-balance-history-everyday-midnight': {
         'task': 'dataparser.tasks.update_balance_history',

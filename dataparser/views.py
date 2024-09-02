@@ -55,7 +55,7 @@ class HTMLParserApi(APIView):
                 return custom_response(error=f'Unsupported Meta Trader version {report.mt_version}.',
                                        status_code=status.BAD_REQUEST_400)
 
-        return custom_response(data=data, status_code=status.OK_200)
+        return custom_response(data=data, status_code=status.OK_200, **{'status': constants.REPORT_STATUS_SUCCESS})
 
 
 class ReportUpdateApi(APIView):

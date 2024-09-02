@@ -127,18 +127,18 @@ def mt5_extract_trade_details(soup):
 
         trade_details = {
             "time": cells[0].get_text(strip=True),
-            "position": cells[1].get_text(strip=True),
+            "position": int(cells[1].get_text(strip=True)),
             "symbol": cells[2].get_text(strip=True),
             "type": cells[3].get_text(strip=True),
-            "volume": cells[5].get_text(strip=True) if cells[5].get_text(strip=True) else None,
-            "price": cells[6].get_text(strip=True) if cells[6].get_text(strip=True) else None,
+            "volume": float(cells[5].get_text(strip=True)) if cells[5].get_text(strip=True) else None,
+            "price": float(cells[6].get_text(strip=True)) if cells[6].get_text(strip=True) else None,
             "s/l": cells[7].get_text(strip=True),
             "t/p": cells[8].get_text(strip=True),
             "time_2": cells[9].get_text(strip=True),
             "price_2": cells[10].get_text(strip=True) if cells[10].get_text(strip=True) else None,
-            "commission": cells[11].get_text(strip=True) if cells[11].get_text(strip=True) else None,
-            "swap": cells[12].get_text(strip=True) if cells[12].get_text(strip=True) else None,
-            "profit": cells[profit_index].get_text(strip=True)
+            "commission": float(cells[11].get_text(strip=True)) if cells[11].get_text(strip=True) else None,
+            "swap": float(cells[12].get_text(strip=True)) if cells[12].get_text(strip=True) else None,
+            "profit": float(cells[profit_index].get_text(strip=True))
         }
 
         trades.append(trade_details)
