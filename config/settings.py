@@ -34,6 +34,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
 DJANGO_APPS = [
     'api.apps.ApiConfig',
     'dataparser.apps.DataparserConfig',
+    'prompt.apps.PromptConfig',
 ]
 
 THIRD_PARTIES = [
@@ -163,3 +164,5 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute='1', hour='0'),
     },
 }
+
+OPENAI_API_KEY = config('OPENAI_API_KEY')

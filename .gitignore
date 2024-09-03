@@ -375,3 +375,5 @@ pyrightconfig.json
 HTMLs/*/
 
 JSONs/*.json
+
+AILogs/*.txt
